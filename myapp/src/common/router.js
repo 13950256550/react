@@ -1,6 +1,5 @@
 import React from 'react';
 import dynamic from 'dva/dynamic';
-import { getMenuData } from './menu';
 
 // wrapper of dynamic
 const dynamicWrapper = (app, models, component) => dynamic({
@@ -70,15 +69,12 @@ export const getRouterData = (app) => {
     },
   };
   // Get name from ./menu.js or just set it in the router data.
-  //const menuData = getFlatMenuData(getMenuData());
   const routerDataWithName = {};
   Object.keys(routerData).forEach((item) => {
     routerDataWithName[item] = {
       ...routerData[item],
       name: routerData[item].name, // || menuData[item.replace(/^\//, '')],
     };
-    //console.log('routerData[item]', item, menuData[item], menuData[item.replace(/^\//, '')]);
   });
-  //console.log('routerDataWithName', routerDataWithName);
   return routerDataWithName;
 };

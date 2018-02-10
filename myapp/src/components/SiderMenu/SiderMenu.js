@@ -3,8 +3,8 @@ import { Layout, Menu, Icon } from 'antd';
 import { Link } from 'dva/router';
 import logo from '../../assets/logo.svg';
 import styles from './index.less';
-import { getMenuData, formatter } from '../../common/menu';
-import { PRO_TITLE, COMPANY_NAME } from '../../common/const';
+import { formatter } from '../../common/menu';
+import { PRO_TITLE } from '../../common/const';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
@@ -12,7 +12,6 @@ const { SubMenu } = Menu;
 export default class SiderMenu extends PureComponent {
   constructor(props) {
     super(props);
-    this.menus = getMenuData();
     this.state = {
       openKeys: this.getDefaultCollapsedSubMenus(props),
     };
@@ -63,7 +62,6 @@ export default class SiderMenu extends PureComponent {
     });
   }
   getNavMenuItems(menusData) {
-    console.log('menusData', menusData)
     if (!menusData) {
       return [];
     }
@@ -76,7 +74,6 @@ export default class SiderMenu extends PureComponent {
         itemPath = item.path;
       } else {
         itemPath = `/app/${item.path || ''}`.replace(/\/+/g, '/');
-        //console.log('itemPath', item.path);
       }
       if (item.children && item.children.some(child => child.name)) {
         return item.hideInMenu ? null :
@@ -122,7 +119,7 @@ export default class SiderMenu extends PureComponent {
   }
   handleOpenChange = (openKeys) => {
     const lastOpenKey = openKeys[openKeys.length - 1];
-    const isMainMenu = this.menus.some(
+    const isMainMenu = this.props.menus.some(
       item => lastOpenKey && (item.key === lastOpenKey || item.path === lastOpenKey),
     );
     this.setState({
@@ -135,9 +132,6 @@ export default class SiderMenu extends PureComponent {
     const menuProps = collapsed ? {} : {
       openKeys: this.state.openKeys,
     };
-    //console.log('this.menus', this.menus);
-    //console.log('this.props.menus', this.props.menus);
-    //console.log('pathname', pathname);
     return (
       <Sider
         trigger={null}

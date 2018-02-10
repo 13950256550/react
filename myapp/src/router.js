@@ -13,7 +13,7 @@ dynamic.setDefaultLoadingComponent(() => {
 
 function RouterConfig({ history, app }) {
   const routerData = getRouterData(app);
-  console.log('RouterConfig', app);
+
   const UserLayout = routerData['/user'].component;
   const BasicLayout = routerData['/app'].component;
   return (

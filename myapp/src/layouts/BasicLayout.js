@@ -12,7 +12,6 @@ import GlobalFooter from '../components/GlobalFooter';
 import SiderMenu from '../components/SiderMenu';
 import NotFound from '../routes/Exception/404';
 import { getRoutes } from '../utils/utils';
-import { getMenuData } from '../common/menu';
 import { PRO_TITLE, COMPANY_NAME } from '../common/const';
 
 /**
@@ -32,7 +31,6 @@ const getRedirect = (item) => {
     }
   }
 };
-//getMenuData().forEach(getRedirect);
 
 const { Content } = Layout;
 const query = {
@@ -100,9 +98,7 @@ class BasicLayout extends React.PureComponent {
     const {
       currentUser, collapsed, fetchingNotices, notices, routerData, match, location, dispatch, menus,
     } = this.props;
-    //console.log('redirectData1', redirectData)
-    //menus.forEach(getRedirect);
-    //console.log('redirectData2', redirectData)
+
     const layout = (
       <Layout>
         <SiderMenu

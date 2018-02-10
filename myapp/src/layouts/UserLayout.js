@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route, routerRedux, Redirect } from 'dva/router';
+import { Link, Route, Redirect } from 'dva/router';
 import DocumentTitle from 'react-document-title';
 import { Icon } from 'antd';
 import GlobalFooter from '../components/GlobalFooter';
@@ -25,13 +25,6 @@ class UserLayout extends React.PureComponent {
   render() {
     const { routerData, match, currentUser } = this.props;
 
-    if (currentUser) {
-      console.log('currentUser1', currentUser);
-      this.props.dispatch(routerRedux.push('/app'));
-    } else {
-      console.log('currentUser2', currentUser);
-      // this.props.dispatch(routerRedux.push('/app'));
-    }
     return (
       <DocumentTitle title={this.getPageTitle()}>
         <div className={styles.container}>
