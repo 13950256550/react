@@ -3,12 +3,21 @@ import { connect } from 'dva';
 import { Button, Row } from 'antd';
 import { SiForm } from '../../common/core/components/SiForm';
 import { EditableTable } from '../../common/core/components/EditableTable';
+import { getRouterDatas } from '../../services/api';
+import { queryMenus } from '../../services/user';
 
 // function TestModule1() {
 class TestModule1 extends React.PureComponent {
   handleSearch = (e) => {
     e.preventDefault();
     this.siform.resetFields();
+    //const response = queryMenus();
+    //console.log('response', response);
+    this.props.dispatch({
+      type: 'user/fetchRouterData',
+      payload: {},
+    });
+    /*
     this.props.dispatch({
       type: 'example/save',
       payload: {
@@ -44,6 +53,7 @@ class TestModule1 extends React.PureComponent {
         ],
       },
     });
+    */
   }
 
   handleSearch2 = (e) => {
@@ -96,7 +106,7 @@ class TestModule1 extends React.PureComponent {
       title: 'age',
       dataIndex: 'age',
       width: '15%',
-      //code: 'BAD305',
+      // code: 'BAD305',
     }, {
       title: 'address',
       dataIndex: 'address',

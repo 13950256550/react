@@ -1,5 +1,6 @@
 import { stringify } from 'qs';
 import request from '../utils/request';
+import request2 from '../utils/request2';
 
 export async function queryProjectNotice() {
   return request('/api/project/notice');
@@ -76,4 +77,16 @@ export async function fakeRegister(params) {
 
 export async function queryNotices() {
   return request('/api/notices');
+}
+
+export function getRouterDatas() {
+  return request2('/api/routerData');
+}
+
+export async function queryList() {
+  return request('/api/list');
+}
+
+export async function queryColumns() {
+  return request('/api/columns');
 }

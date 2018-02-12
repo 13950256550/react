@@ -139,9 +139,52 @@ const proxy = {
       children: [{
         name: '测试模块',
         path: 'test-module',
+      }, {
+        name: '数据',
+        path: 'scrapy-module',
       }],
     },
   ],
+
+  'GET /api/routerData': [
+    { path: '/app', depend: ['user', 'login'], file: '../layouts/BasicLayout' },
+    { path: '/app/home', depend: [], file: '../routes/IndexPage' },
+    { path: '/app/dashboard/analysis', depend: ['chart'], file: '../routes/Dashboard/Analysis' },
+    { path: '/user', depend: [], file: '../layouts/UserLayout' },
+    { path: '/user/login', depend: ['login'], file: '../routes/User/Login' },
+    { path: '/app/test-subsystem/test-module', depend: ['example'], file: '../routes/TestSubsystem/TestModule1' },
+    { path: '/app/form/basic-form', depend: ['form'], file: '../routes/Forms/BasicForm' },
+    { path: '/app/form/step-form', depend: ['form'], file: '../routes/Forms/StepForm' },
+    { path: '/app/form/step-form/info', depend: ['form'], file: '../routes/Forms/StepForm/Step1' },
+    { path: '/app/form/step-form/confirm', depend: ['form'], file: '../routes/Forms/StepForm/Step2' },
+    { path: '/app/form/step-form/result', depend: ['form'], file: '../routes/Forms/StepForm/Step3' },
+    { path: '/app/form/advanced-form', depend: ['form'], file: '../routes/Forms/AdvancedForm' },
+  ],
+
+  'GET /api/list': [{
+    name: '胡彦斌',
+    age: 32,
+    address: '西湖区湖底公园1号',
+  }, {
+    name: '胡彦祖',
+    age: 42,
+    address: '西湖区湖底公园1号',
+  }],
+
+  'GET /api/columns': [{
+    title: '姓名',
+    dataIndex: 'name',
+    key: 'name',
+  }, {
+    title: '年龄',
+    dataIndex: 'age',
+    key: 'age',
+  }, {
+    title: '住址',
+    dataIndex: 'address',
+    key: 'address',
+  }],
 };
+
 
 export default noProxy ? {} : delay(proxy, 1000);

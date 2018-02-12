@@ -9,6 +9,7 @@ const dynamicWrapper = (app, models, component) => dynamic({
   // add routerData prop
   component: () => {
     const routerData = getRouterData(app);
+
     return component().then((raw) => {
       const Component = raw.default || raw;
       return props => <Component {...props} routerData={routerData} />;
@@ -49,6 +50,9 @@ export const getRouterData = (app) => {
     '/app/test-subsystem/test-module': {
       component: dynamicWrapper(app, ['example'], () => import('../routes/TestSubsystem/TestModule1')),
     },
+    '/app/test-subsystem/scrapy-module': {
+      component: dynamicWrapper(app, ['example'], () => import('../routes/TestSubsystem/ScrapyModule')),
+    },
     '/app/form/basic-form': {
       component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/BasicForm')),
     },
@@ -78,3 +82,4 @@ export const getRouterData = (app) => {
   });
   return routerDataWithName;
 };
+

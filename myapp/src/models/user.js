@@ -1,4 +1,5 @@
 import { query as queryUsers, queryCurrent, queryMenus } from '../services/user';
+import { getRouterDatas } from '../services/api';
 
 export default {
   namespace: 'user',
@@ -8,6 +9,7 @@ export default {
     loading: false,
     currentUser: {},
     menus: [],
+    routerData: [],
   },
 
   effects: {
@@ -41,6 +43,15 @@ export default {
         payload: response.data ? response.data : [],
       });
     },
+
+    *fetchRouterData(_, { call, put }) {
+      const response = yield call(getRouterDatas);
+      console.log('response', response)
+      yield put({
+        type: 'saveRouterData',
+        payload: response.data ? response.data : [],
+      });
+    },
   },
 
   reducers: {
@@ -66,6 +77,12 @@ export default {
       return {
         ...state,
         menus: action.payload,
+      };
+    },
+    saveRouterData(state, action) {
+      return {
+        ...state,
+        routerData: action.payload,
       };
     },
     changeNotifyCount(state, action) {

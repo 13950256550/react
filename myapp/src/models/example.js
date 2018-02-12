@@ -1,4 +1,5 @@
 import { formItemLayout } from '../common/const';
+import { queryList, queryColumns } from '../services/api';
 
 
 export default {
@@ -16,6 +17,9 @@ export default {
     dataSource: [],
     pagination: [],
     cacheTableData: {},
+    testdata: '测试字符串',
+    columns: [],
+    list: [],
   },
 
   subscriptions: {
@@ -26,6 +30,22 @@ export default {
   effects: {
     *fetch({ payload }, { call, put }) {  // eslint-disable-line
       yield put({ type: 'save' });
+    },
+
+    *fetchList(_, { call, put }) {  // eslint-disable-line
+      const response = yield call(queryList);
+      yield put({
+        type: 'saveList',
+        payload: response.data ? response.data : [],
+      });
+    },
+
+    *fetchColumns(_, { call, put }) {  // eslint-disable-line
+      const response = yield call(queryColumns);
+      yield put({
+        type: 'saveColumns',
+        payload: response.data ? response.data : [],
+      });
     },
   },
 
@@ -49,6 +69,20 @@ export default {
       delete state.cacheTableData[index];
       const target = Object.assign([], state.dataSource);
       return { ...state, dataSource: target };
+    },
+
+    saveList(state, action) {
+      return {
+        ...state,
+        list: state.list.concat(action.payload),
+      };
+    },
+
+    saveColumns(state, action) {
+      return {
+        ...state,
+        columns: action.payload,
+      };
     },
   },
 };
